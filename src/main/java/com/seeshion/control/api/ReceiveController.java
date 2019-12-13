@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 
 /***
@@ -43,10 +45,18 @@ public class ReceiveController {
 
 //        smsSender.sendSms();
 //        requestTestService.insertTestRequest();
-        StatisticsOfCprOrders statisticsOfCprOrders = cprOrderService.getOrdersOfPeriodTime(10,999999999999999L);
+//        HashMap<String, Object> statistics = cprOrderService.getOrdersOfPeriodTime(10,999999999999999L);
 
-        System.out.println("rateOfSuccess" + statisticsOfCprOrders.getRateOfSuccess());
 
-        return JSON.toJSONString(statisticsOfCprOrders);
+//        return JSON.toJSONString(statistics);
+
+
+        return double2percent(0.039545);
+    }
+
+    public String double2percent(Double rate) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String ret = df.format(rate*100) + "%";
+        return ret;
     }
 }

@@ -19,6 +19,17 @@ public class ChuangLanSmsConfig {
     @Value("${sx.sms.password}")
     private String password;
 
+    @Value("${sx.sms.warn-telphone}")
+    private String warningTelPhone;
+
+    public String getWarningTelPhone() {
+        return warningTelPhone;
+    }
+
+    public void setWarningTelPhone(String warningTelPhone) {
+        this.warningTelPhone = warningTelPhone;
+    }
+
     public String getAccount() {
         return account;
     }

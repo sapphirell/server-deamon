@@ -20,17 +20,31 @@ public class SmsSender {
     @Autowired
     private ChuangLanSmsConfig chuangLanSmsConfig;
 
-    public void sendSms() {
-        String msg = "【ve】您好，您的验证码是 1234 ,5分钟内有效。如非本人操作请忽略此短信。";
-        if (chuangLanSmsConfig == null)
-        {
-            return ;
+    /****
+     * 【ve】平台监控的{s8}率超过阈值，其中监控时间段内任务总数为{s10}，失败率为{s6}，等待率为{s6}
+     * @return
+     */
+    public String getMessageOfPlatformTemplate(int totalTaskNum, String rateOfFailed, String rateOfSpending) {
+        return "【ve】平台监控的失败率或等待率超过阈值，其中监控时间段内任务总数为" + totalTaskNum + "，失败率为" + rateOfFailed + "，等待率为" + rateOfSpending + "。";
+    }
+
+    /****
+     * 用户{s10}的任务异常，监控时段内其任务总数{s8},失败率{s6},等待率{s6}。
+     * @return
+     */
+    public String getMessageOfUserTemplate(String userName, int totalTaskNum, String rateOfFailed, String rateOfSpending) {
+        return "【ve】用户" + userName + "的任务异常，监控时段内其任务总数" + totalTaskNum + ",失败率" + rateOfFailed + ",等待率" + rateOfSpending + "。";
+    }
+
+    public void sendSms(String msg) {
+        if (chuangLanSmsConfig == null) {
+            return;
         }
         SmsSendRequest smsSingleRequest = new SmsSendRequest(
                 chuangLanSmsConfig.getAccount(),
                 chuangLanSmsConfig.getPassword(),
                 msg,
-                "17602114904"
+                chuangLanSmsConfig.getWarningTelPhone()
         );
 
 

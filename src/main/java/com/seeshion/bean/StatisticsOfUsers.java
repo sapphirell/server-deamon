@@ -1,11 +1,9 @@
 package com.seeshion.bean;
 
-/***
- * @Author:ran
- */
-public class StatisticsOfCprOrders {
-    /**
-     * 总任务数量
+public class StatisticsOfUsers {
+    private String uid;
+    /***
+     * 任务数量统计
      */
     private int totalTask;
     private int successTask;
@@ -19,22 +17,25 @@ public class StatisticsOfCprOrders {
      * 最短渲染时间
      */
     private long shortestCostTime;
+    /**
+     * 总渲染时长
+     */
     private long totalCostTime;
 
     public double getRateOfSuccess() {
-        return this.totalTask > 0 ? (double)this.successTask / this.totalTask : 0;
+        return this.totalTask > 0 ? (double) this.successTask / this.totalTask : 0;
     }
 
     public double getRateOfFailed() {
-        return this.totalTask > 0 ? (double)this.failTask / this.totalTask : 0;
+        return this.totalTask > 0 ? (double) this.failTask / this.totalTask : 0;
     }
 
     public double getRateOfSpending() {
-        return this.totalTask > 0 ? (double)this.spendingTask / this.totalTask : 0;
+        return this.totalTask > 0 ? (double) this.spendingTask / this.totalTask : 0;
     }
 
     public double getAverageCostTime() {
-        return this.successTask > 0 ? (double)this.totalCostTime / this.successTask : 0;
+        return this.successTask > 0 ? (double) this.totalCostTime / this.successTask : 0;
     }
 
     public void addTotalTask() {
@@ -55,6 +56,14 @@ public class StatisticsOfCprOrders {
 
     public void addTotalCostTime(long costTime) {
         this.totalCostTime += costTime;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public int getTotalTask() {
@@ -81,17 +90,6 @@ public class StatisticsOfCprOrders {
         this.failTask = failTask;
     }
 
-    public long getLongestCostTime() {
-        return longestCostTime;
-    }
-
-    public void setLongestCostTime(long longestCostTime) {
-        if (longestCostTime > this.longestCostTime) {
-            this.longestCostTime = longestCostTime;
-        }
-
-    }
-
     public int getSpendingTask() {
         return spendingTask;
     }
@@ -100,14 +98,20 @@ public class StatisticsOfCprOrders {
         this.spendingTask = spendingTask;
     }
 
+    public long getLongestCostTime() {
+        return longestCostTime;
+    }
+
+    public void setLongestCostTime(long longestCostTime) {
+        this.longestCostTime = longestCostTime;
+    }
+
     public long getShortestCostTime() {
         return shortestCostTime;
     }
 
     public void setShortestCostTime(long shortestCostTime) {
-        if (shortestCostTime < this.shortestCostTime) {
-            this.shortestCostTime = shortestCostTime;
-        }
+        this.shortestCostTime = shortestCostTime;
     }
 
     public long getTotalCostTime() {
